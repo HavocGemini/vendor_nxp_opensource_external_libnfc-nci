@@ -20,6 +20,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := nxp
 LOCAL_SHARED_LIBRARIES := libhardware_legacy libcutils liblog libdl libhardware
 LOCAL_CFLAGS := $(D_CFLAGS)
+LOCAL_CFLAGS += -Wno-sometimes-uninitialized -Wno-unused-function -Wno-pointer-sign
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/include/ \
     $(LOCAL_PATH)/inc/

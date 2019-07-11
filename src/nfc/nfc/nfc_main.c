@@ -52,7 +52,7 @@
 #if(NXP_EXTNS == TRUE)
 static phNxpNci_getCfg_info_t* mGetCfg_info_main = NULL;
 extern void nfa_dm_init_cfgs(phNxpNci_getCfg_info_t* mGetCfg_info_main);
-extern nfa_ee_max_ee_cfg;
+extern uint8_t nfa_ee_max_ee_cfg;
 #endif
 
 /* NFC mandates support for at least one logical connection;
@@ -1746,7 +1746,7 @@ int32_t NFC_eSEChipReset(void* pdata) {
 **
 *******************************************************************************/
 int32_t NFC_GetEseAccess(void* pdata) {
-    int32_t status;
+    int32_t status = 0;
     if((nfcFL.eseFL._NXP_ESE_VER != JCOP_VER_3_1) &&
             (nfcFL.eseFL._NXP_ESE_VER != JCOP_VER_3_2)) {
         NFC_TRACE_API0("NFC_GetEseAccess NXP_ESE_VER !="
@@ -1770,7 +1770,7 @@ int32_t NFC_GetEseAccess(void* pdata) {
 **
 *******************************************************************************/
 int32_t NFC_RelEseAccess(void* pdata) {
-    int32_t status;
+    int32_t status = 0;
     if((nfcFL.eseFL._NXP_ESE_VER != JCOP_VER_3_1) &&
             (nfcFL.eseFL._NXP_ESE_VER != JCOP_VER_3_2)) {
         NFC_TRACE_API0("NFC_RelEseAccess NXP_ESE_VER !="

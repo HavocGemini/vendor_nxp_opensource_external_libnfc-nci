@@ -569,7 +569,7 @@ void IoctlCallback(::android::hardware::nfc::V1_0::NfcData outputData) {
   const char* func = "IoctlCallback";
   nfc_nci_ExtnOutputData_t* pOutData =
       (nfc_nci_ExtnOutputData_t*)&outputData[0];
-  ALOGD("%s Ioctl Type=%llu", func, pOutData->ioctlType);
+  ALOGD("%s Ioctl Type=%lu", func, pOutData->ioctlType);
   NfcAdaptation* pAdaptation = (NfcAdaptation*)pOutData->context;
   /*Output Data from stub->Proxy is copied back to output data
    * This data will be sent back to libnfc*/
@@ -604,7 +604,7 @@ int NfcAdaptation::HalIoctl(long arg, void* p_data) {
   data.setToExternal((uint8_t*)pInpOutData, sizeof(nfc_nci_IoctlInOutData_t));
   if(mNqHal != nullptr)
       mNqHal->ioctl(arg, data, IoctlCallback);
-  ALOGD("%s Ioctl Completed for Type=%llu", func, pInpOutData->out.ioctlType);
+  ALOGD("%s Ioctl Completed for Type=%lu", func, pInpOutData->out.ioctlType);
   return (pInpOutData->out.result);
 }
 

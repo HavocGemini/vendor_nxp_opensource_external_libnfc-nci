@@ -1632,10 +1632,10 @@ void nfa_ee_api_add_apdu(tNFA_EE_MSG* p_data) {
       p_cb->apdu_rt_info[entry] |= NFA_EE_AE_ROUTE;
       new_size = nfa_ee_total_lmrt_size();
 #if (NXP_EXTNS == TRUE)
-      if (((nfcFL.chipType != pn547C2) &&
-              nfcFL.nfcMwFL._NFC_NXP_AID_MAX_SIZE_DYN) && new_size > max_aid_config_length ||
-              ((nfcFL.chipType == pn547C2) &&
-                      !nfcFL.nfcMwFL._NFC_NXP_AID_MAX_SIZE_DYN) && (new_size > NFC_GetLmrtSize())) {
+      if ((((nfcFL.chipType != pn547C2) &&
+              nfcFL.nfcMwFL._NFC_NXP_AID_MAX_SIZE_DYN) && (new_size > max_aid_config_length)) ||
+              (((nfcFL.chipType == pn547C2) &&
+                      !nfcFL.nfcMwFL._NFC_NXP_AID_MAX_SIZE_DYN) && (new_size > NFC_GetLmrtSize()))) {
 #else
       if (new_size > NFC_GetLmrtSize()) {
 #endif

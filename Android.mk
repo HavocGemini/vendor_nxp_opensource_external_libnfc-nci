@@ -122,6 +122,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/src/include \
     $(LOCAL_PATH)/$(HALIMPL)/include \
     system/libhwbinder/include
 
+LOCAL_CFLAGS += -Wno-sometimes-uninitialized -Wno-unused-function -Wno-pointer-sign -Wno-unused-private-field
+
 # Treble configuration
 LOCAL_SHARED_LIBRARIES += libhidlbase libhidltransport libhwbinder libutils android.hardware.nfc@1.0 android.hardware.nfc@1.1 vendor.nxp.hardware.nfc@1.0
 LOCAL_SRC_FILES := \

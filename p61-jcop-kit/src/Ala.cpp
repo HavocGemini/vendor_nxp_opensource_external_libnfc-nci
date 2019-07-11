@@ -1201,7 +1201,7 @@ tJBL_STATUS ALA_Check_KeyIdentifier(Ala_ImageInfo_t *Os_info, tJBL_STATUS status
                             wLen);
                         }
 #endif
-                        ALOGE("%s: start transceive for length %ld", fn,
+                        ALOGE("%s: start transceive for length %d", fn,
                         pTranscv_Info->sSendlength);
 #if(NXP_LDR_SVC_VER_2 == TRUE)
                         status = ALA_SendtoAla(Os_info, status, pTranscv_Info, LS_Sign);
@@ -1379,7 +1379,7 @@ tJBL_STATUS ALA_ReadScript(Ala_ImageInfo_t *Os_info, uint8_t *read_buf)
 
             wLen = read_buf[lenOff+1];
             Os_info->bytes_read = Os_info->bytes_read + (wCount*2);
-            ALOGD("%s: Length of Read Script in len_byte= 0x02 is 0x%lx ", fn, wLen);
+            ALOGD("%s: Length of Read Script in len_byte= 0x02 is 0x%x ", fn, wLen);
         }
         else if(len_byte == 0x03)
         {
@@ -1396,7 +1396,7 @@ tJBL_STATUS ALA_ReadScript(Ala_ImageInfo_t *Os_info, uint8_t *read_buf)
             Os_info->bytes_read = Os_info->bytes_read + (wCount*2);
             wLen = read_buf[lenOff+1]; //Length of the packet send to ALA
             wLen = ((wLen << 8) | (read_buf[lenOff+2]));
-            ALOGD("%s: Length of Read Script in len_byte= 0x03 is 0x%lx ", fn, wLen);
+            ALOGD("%s: Length of Read Script in len_byte= 0x03 is 0x%x ", fn, wLen);
         }
         else
         {
@@ -1409,7 +1409,7 @@ tJBL_STATUS ALA_ReadScript(Ala_ImageInfo_t *Os_info, uint8_t *read_buf)
     {
         len_byte = 0x01;
         wLen = read_buf[lenOff];
-        ALOGE("%s: Length of Read Script in len_byte= 0x01 is 0x%lx ", fn, wLen);
+        ALOGE("%s: Length of Read Script in len_byte= 0x01 is 0x%x ", fn, wLen);
     }
 
 
@@ -1433,7 +1433,7 @@ tJBL_STATUS ALA_ReadScript(Ala_ImageInfo_t *Os_info, uint8_t *read_buf)
         status = STATUS_OK;
     }
 
-    ALOGD("%s: exit: status=0x%x; Num of bytes read=%d and index=%ld",
+    ALOGD("%s: exit: status=0x%x; Num of bytes read=%d and index=%d",
     fn, status, Os_info->bytes_read,wIndex);
 
     return status;
@@ -2316,7 +2316,7 @@ uint8_t Numof_lengthbytes(uint8_t *read_buf, int32_t *pLen)
     }
 
     *pLen = wLen;
-    ALOGE("%s:exit; len_bytes=0x0%x, Length=%ld", fn, len_byte, *pLen);
+    ALOGE("%s:exit; len_bytes=0x0%x, Length=%d", fn, len_byte, *pLen);
     return len_byte;
 }
 #if(NXP_LDR_SVC_VER_2 == TRUE)
@@ -2456,7 +2456,7 @@ tJBL_STATUS Write_Response_To_OutFile(Ala_ImageInfo_t *image_info, uint8_t* Recv
         status = fprintf(image_info->fResp, "%02X", tagBuffer[tempLen++]);
         if(status != 2)
         {
-            ALOGE("%s: Invalid Response during fprintf; status=0x%lx", fn, (status));
+            ALOGE("%s: Invalid Response during fprintf; status=0x%x", fn, (status));
             wStatus = STATUS_FAILED;
             break;
         }
@@ -2467,15 +2467,15 @@ tJBL_STATUS Write_Response_To_OutFile(Ala_ImageInfo_t *image_info, uint8_t* Recv
         status = fprintf(image_info->fResp, "%02X", RecvData[respLen++]);
         if(status != 2)
         {
-            ALOGE("%s: Invalid Response during fprintf; status=0x%lx", fn, (status));
+            ALOGE("%s: Invalid Response during fprintf; status=0x%x", fn, (status));
             wStatus = STATUS_FAILED;
             break;
         }
     }
-    if((status == 2))
+    if(status == 2)
     {
         fprintf(image_info->fResp, "%s\n", "");
-        ALOGE("%s: SUCCESS Response written to script out file; status=0x%lx", fn, (status));
+        ALOGE("%s: SUCCESS Response written to script out file; status=0x%x", fn, (status));
         wStatus = STATUS_OK;
     }
     fflush(image_info->fResp);
@@ -2528,7 +2528,7 @@ tJBL_STATUS Check_SerialNo_Tag(uint8_t *read_buf, uint16_t *offset1)
     uint16_t offset = *offset1;
     static const char fn[] = "Check_SerialNo_Tag";
 
-    if((read_buf[offset] == TAG_SERIAL_NO))
+    if(read_buf[offset] == TAG_SERIAL_NO)
     {
         ALOGD("TAGID: TAG_SERIAL_NO");
         uint8_t serNoLen = read_buf[offset+1];
@@ -2767,7 +2767,7 @@ uint8_t *tag45Len)
         pTranscv_Info->sSendlength  = wCertfLen+7+tag_len_byte;
         memcpy(&(pTranscv_Info->sSendData[5]), &read_buf[0], wCertfLen+2+tag_len_byte);
 
-        ALOGD("%s: start transceive for length %ld", fn, pTranscv_Info->
+        ALOGD("%s: start transceive for length %d", fn, pTranscv_Info->
             sSendlength);
         status = ALA_SendtoAla(Os_info, status, pTranscv_Info,LS_Cert);
         if(status != STATUS_OK)
@@ -2822,7 +2822,7 @@ uint8_t *tag45Len)
                 pTranscv_Info->sSendData[4] = tag7f49Off;
                 memcpy(&(pTranscv_Info->sSendData[5]), &read_buf[0], tag7f49Off);
                 pTranscv_Info->sSendlength = tag7f49Off+5;
-                ALOGD("%s: start transceive for length %ld", fn,
+                ALOGD("%s: start transceive for length %d", fn,
                 pTranscv_Info->sSendlength);
 
                 status = ALA_SendtoAla(Os_info, status, pTranscv_Info,LS_Default);
@@ -2840,7 +2840,7 @@ uint8_t *tag45Len)
                 memcpy(&(pTranscv_Info->sSendData[5]), &read_buf[tag7f49Off],
                     u7f49Len+tag5f37Len+6);
                 pTranscv_Info->sSendlength = u7f49Len+tag5f37Len+11;
-                ALOGD("%s: start transceive for length %ld", fn,
+                ALOGD("%s: start transceive for length %d", fn,
                     pTranscv_Info->sSendlength);
 
                 status = ALA_SendtoAla(Os_info, status, pTranscv_Info,LS_Cert);
@@ -2994,14 +2994,14 @@ tJBL_STATUS ALA_getAppletLsStatus(Ala_ImageInfo_t *Os_info, tJBL_STATUS status, 
                 (pTranscv_Info->sRecvData[recvBufferActualSize-1] == 0x00))
         {
             ALOGE("STORE CMD is successful");
-            if((pTranscv_Info->sRecvData[0] == 0x46 )&& (pTranscv_Info->sRecvData[1] == 0x01 ))
+            if((pTranscv_Info->sRecvData[0] == 0x46) && (pTranscv_Info->sRecvData[1] == 0x01))
             {
-               if((pTranscv_Info->sRecvData[2] == 0x01))
+               if(pTranscv_Info->sRecvData[2] == 0x01)
                {
                    lsGetStatusArr[0]=0x63;lsGetStatusArr[1]=0x40;
                    ALOGE("%s: Script execution status FAILED", fn);
                }
-               else if((pTranscv_Info->sRecvData[2] == 0x00))
+               else if(pTranscv_Info->sRecvData[2] == 0x00)
                {
                    lsGetStatusArr[0]=0x90;lsGetStatusArr[1]=0x00;
                    ALOGE("%s: Script execution status SUCCESS", fn);

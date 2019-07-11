@@ -521,7 +521,7 @@ static void nfa_dm_nfc_response_cback(tNFC_RESPONSE_EVT event,
     case NFC_NFCC_TRANSPORT_ERR_REVT:
       NFA_TRACE_DEBUG1("flags:0x%08x", nfa_dm_cb.flags);
 #if (NXP_EXTNS == TRUE)
-      if(nfcFL.nfccFL._NFCC_I2C_READ_WRITE_IMPROVEMENT) {
+      if (nfcFL.nfccFL._NFCC_I2C_READ_WRITE_IMPROVEMENT) {
           if (p_data->status == NFC_STATUS_FAILED) {
               dm_cback_data.status = p_data->status;
           }
